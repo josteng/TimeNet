@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://docs.timenet.ai/schemas/dataset-card-v1.schema.json
+yaml_schema_version: 1
+dataset_id: error404/db-station-early-warning
+dataset_version: 1.0.0
+name: DB Station Early Warning
+description: >-
+  Early warning of train disruptions at German railway stations. 140,000 samples (80,000 train,
+  10,000 validation, 30,000 test, 20,000 later out-of-time test) from the 400 busiest stations,
+  built from Deutsche Bahn's Timetables API as scraped in piebro/deutsche-bahn-data (November 2025
+  to October 2026). Each sample is a station at a moment t0 when it runs normally. Its Record
+  holds the 24 hours before t0 in 15-minute bins (mean arrival delay, share of arrivals 6+ minutes
+  late, share cancelled, planned arrivals), the mean arrival delay at up to four feeder stations
+  and across the network, and the station's hourly delay over the 7 days before t0. It also
+  describes the trains due at the station in the next two hours, per 15-minute bin of planned
+  arrival, as known at t0: how many are due, their mean and largest delay at the last stop they
+  left before t0, the share not started yet, and the delay they gained over their last two stops.
+  A ClassificationTask asks whether a disruption starts within two hours: the share of late or
+  cancelled arrivals reaches the station's own 90th percentile, at least 20 %. A
+  ScalarPredictionTask asks for that share. About 4 % of samples are disruptions. Percentiles come
+  from the training months only and every input lies before t0. Splits are by time; one station in
+  five never appears in training. Times are local Berlin time as published. Arrivals without a
+  recorded change count as on time, as in the source; replacement services and buses are left out.
+license: CC-BY-4.0
+source_url: https://huggingface.co/datasets/piebro/deutsche-bahn-data
+citation: >-
+  Deutsche Bahn Timetables API data (CC BY 4.0), collected by piebro in deutsche-bahn-data,
+  https://github.com/piebro/deutsche-bahn-data
+domains:
+  - transport
+tags:
+  - railway
+  - delays
+  - early-warning
+  - classification
+  - regression

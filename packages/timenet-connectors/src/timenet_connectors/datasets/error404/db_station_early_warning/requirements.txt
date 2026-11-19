@@ -1,0 +1,5 @@
+# Downloads the pinned monthly parquet files from the Hub.
+huggingface_hub>=1.1
+# Aggregates ~170M stop events into 15-minute station bins.
+duckdb>=1.1
+pandas>=2.2
